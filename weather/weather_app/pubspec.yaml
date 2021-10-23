@@ -80,6 +80,9 @@ flutter:
     - family: Manrope
       fonts:
         - asset: fonts/Manrope-VariableFont_wght.ttf
+    - family: Gilroy-medium
+      fonts:
+        - asset: fonts/Gilroy-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
