@@ -6,6 +6,13 @@ void main() {
 }
 
 class Main extends StatelessWidget {
+  hexColor(String colorhexcode) {
+    String colornew = '0xff' + colorhexcode;
+    colornew = colornew.replaceAll('#', '');
+    int colorint = int.parse(colornew); //метод для цветов с кодом
+    return colorint;  //для кнопки было
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +27,7 @@ class Main extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 70, 0, 0), //мб удалить контейнер с отступом - узнать у препода
               ),
               Text(
                 "10°с",
@@ -41,7 +48,7 @@ class Main extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -49,3 +56,4 @@ class Main extends StatelessWidget {
     );
   }
 }
+
