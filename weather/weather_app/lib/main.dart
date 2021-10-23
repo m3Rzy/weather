@@ -2,19 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  Main () => runApp(Main)
+  runApp(Main());
 }
 
 class Main extends StatelessWidget{
   @override
   Widget build(BuildContext context){
-    return new Scaffold(
-      body: new Container(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            new Image.asset("assets/images/bg.png") 
-          ]
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            )
+          ),
         )
       )
     );
