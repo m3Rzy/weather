@@ -6,58 +6,23 @@ void main() {
 }
 
 class Main extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Builder(
-          builder: (context) {
-            return Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage("assets/images/bg.png"),
-                fit: BoxFit.cover,
-              )),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(0, 70, 0,
-                        0), //мб удалить контейнер с отступом - узнать у препода
-                  ),
-
-
-                ElevatedButton(
-                  child: Text('vlad love'),
-                onPressed: () {
-                  print('test');
-                  showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          height: 360,
-                          color: const Color(0xffE2EBFF),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const Text('Modal BottomSheet'),
-                                ElevatedButton(
-                                  child: const Text('Close BottomSheet'),
-                                  onPressed: () => Navigator.pop(context),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      }
-                      );
-                },
-              ),
-
-                  const Text(
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.cover,
+          )),
+          child: Center(
+            child: Column(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 70, 0, 0),
+                  child: Text(
                     "10°с",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -67,20 +32,20 @@ class Main extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const Text(
-                    "23 сент. 2021",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Gilroy-medium",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                ),
+                Text(
+                  "23 сент. 2021",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Gilroy-medium",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
-            );
-          }
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
