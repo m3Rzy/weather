@@ -6,12 +6,6 @@ void main() {
 }
 
 class Main extends StatelessWidget {
-  hexColor(String colorhexcode) {
-    String colornew = '0xff' + colorhexcode;
-    colornew = colornew.replaceAll('#', '');
-    int colorint = int.parse(colornew); //метод для цветов с кодом
-    return colorint; //для кнопки было
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +37,7 @@ class Main extends StatelessWidget {
                       builder: (BuildContext context) {
                         return Container(
                           height: 360,
-                          color: Colors.amber,
+                          color: const Color(0xffE2EBFF),
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
