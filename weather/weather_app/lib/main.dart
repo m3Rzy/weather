@@ -22,7 +22,46 @@ class Main extends StatelessWidget {
             ),
             context: context,
             builder: (context) => Container(
-              height: 256,
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(3),
+                      ),
+                      color: Color(0xff038CFE),
+                    ),
+                    width: 60,
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 221, 0, 0), //171px
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: const Color(0xffE2EBFF),
+                        shadowColor: Colors.black,
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        primary: const Color(0xff038CFE),
+                        side: const BorderSide(color: Color(0xff038CFE)),
+                      ),
+                      child: const Text(
+                        'Прогноз на неделю',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: "Gilroy-medium",
+                          fontSize: 14,
+                        ),
+                      ),
+                      onPressed: () => print('object'),
+                    ),
+                  )
+                ],
+              ),
+              height: 360,
+              width: 256,
             ),
           );
         });
