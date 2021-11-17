@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   expandable_bottom_sheet: ^1.1.1+1
+  flutter_neumorphic: ^3.0.3
   flutter:
     sdk: flutter
 
@@ -64,6 +65,8 @@ flutter:
     - assets/icons/rain.png
     - assets/icons/sun.png
     - assets/images/bg.png
+    - assets/icons/burger.png
+    - assets/icons/plus.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
