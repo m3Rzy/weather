@@ -16,9 +16,12 @@ class _MainScreenPageState extends State<MainScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [const MyHeaderDrawer(), MyDrawerList()],
+        child: Container(
+          color: const Color(0xffE2EBFF), //цвет левой менюхи
+          child: SingleChildScrollView(
+            child: Column(
+              children: [const MyHeaderDrawer(), MyDrawerList()],
+            ),
           ),
         ),
       ),
@@ -41,7 +44,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                         children: [
                           NeumorphicButton(
                             child: NeumorphicIcon(
-                              Icons.menu,
+                              Icons.menu_rounded,
                               size: 30,
                             ),
                             style: const NeumorphicStyle(
@@ -173,5 +176,30 @@ class _MainScreenPageState extends State<MainScreenPage> {
 }
 
 Widget MyDrawerList() {
-  return Container();
+  return Container(
+    color: Color(0xffE2EBFF),
+    child: Column(
+      children: [
+        menuItem(),
+      ],
+    ),
+  );
+}
+
+Widget menuItem() {
+  return Material(
+    child: InkWell(
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Row(
+          children: const [
+            Expanded(
+              child: Icon(Icons.dashboard_customize,
+                  size: 16.0, color: Colors.black),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
 }
