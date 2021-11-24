@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:weather_app/_mainscreen.dart';
-import 'package:weather_app/main.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -12,12 +13,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainScreenPage()));
     });
     return Scaffold(
-      backgroundColor: Color(0xffE2EBFF),
+      backgroundColor: const Color(0xffE2EBFF),
       body: Center(
         child: Stack(
           children: const [
