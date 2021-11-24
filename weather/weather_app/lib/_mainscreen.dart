@@ -177,7 +177,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
 Widget MyDrawerList() {
   return Container(
-    color: Color(0xffE2EBFF),
+    color: const Color(0xffE2EBFF),
     child: Column(
       children: [
         menuItem(),
@@ -188,17 +188,92 @@ Widget MyDrawerList() {
 
 Widget menuItem() {
   return Material(
-    child: InkWell(
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: Row(
-          children: const [
-            Expanded(
-              child: Icon(Icons.dashboard_customize,
-                  size: 16.0, color: Colors.black),
-            )
-          ],
-        ),
+    child: Container(
+      color: const Color(0xffE2EBFF),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.fromLTRB(42, 42, 42, 0),
+            child: InkWell(
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.settings_outlined,
+                    size: 29.0,
+                    color: Colors.black,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'Настройки',
+                      style: TextStyle(
+                          fontFamily: "Gilroy-medium",
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ],
+              ),
+              onTap: () {
+                print('object');
+              }, //кнопка сетинги
+            ),
+          ), //////////////////////////////////////////////
+          Container(
+            padding: const EdgeInsets.fromLTRB(42, 42, 42, 0),
+            child: InkWell(
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.favorite_outline_outlined,
+                    size: 29.0,
+                    color: Colors.black,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'Избранные',
+                      style: TextStyle(
+                          fontFamily: "Gilroy-medium",
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ],
+              ),
+              onTap: () {
+                print('object2');
+              }, //кнопка сетинги
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(42, 42, 42, 0),
+            child: InkWell(
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.account_circle_outlined,
+                    size: 29.0,
+                    color: Colors.black,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'О приложении',
+                      style: TextStyle(
+                          fontFamily: "Gilroy-medium",
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ],
+              ),
+              onTap: () {
+                print('object3');
+              }, //кнопка сетинги
+            ),
+          ),
+        ],
       ),
     ),
   );
