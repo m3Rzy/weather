@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/about.dart';
 import 'package:weather_app/settings.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
@@ -111,7 +112,10 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
                         ],
                       ),
                       onTap: () {
-                        print('object3');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AboutPage()));
                       }, //кнопка сетинги
                     ),
                   ),

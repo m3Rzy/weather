@@ -12,9 +12,6 @@ class MainScreenPage extends StatefulWidget {
   _MainScreenPageState createState() => _MainScreenPageState();
 }
 
-
-
-
 class _MainScreenPageState extends State<MainScreenPage> {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
           color: const Color(0xffE2EBFF), //цвет левой менюхи
           child: SingleChildScrollView(
             child: Column(
-              children: [const MyHeaderDrawer()],
+              children: [MyHeaderDrawer()],
             ),
           ),
         ),
@@ -178,4 +175,3 @@ class _MainScreenPageState extends State<MainScreenPage> {
     );
   }
 }
-
