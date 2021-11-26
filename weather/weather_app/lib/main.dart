@@ -15,4 +15,5 @@ class Main extends StatelessWidget {
       home: SplashScreen(),
     );
   }
+  
 }
