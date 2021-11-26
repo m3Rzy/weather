@@ -6,7 +6,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Text('Hello, Settings!'),
+      child: Container(
+        color: Color(0xffE2EBFF),
+      ),
     );
   }
 }
