@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: Color(0xffE2EBFF),
+        color: const Color(0xffE2EBFF),
       ),
     );
   }
