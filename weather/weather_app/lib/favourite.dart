@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/_mainscreen.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+import '_mainscreen.dart';
+
+class FavouritePage extends StatelessWidget {
+  const FavouritePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class SettingsPage extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
-                            'Настройки',
+                            'Избранные',
                             style: TextStyle(
                                 fontFamily: "Gilroy-medium",
                                 fontSize: 20.0,
@@ -46,5 +47,6 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

@@ -2,6 +2,7 @@ import 'package:expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:weather_app/search.dart';
 import 'package:weather_app/settings.dart';
 import 'drawer_header.dart';
 
@@ -88,32 +89,25 @@ class _MainScreenPageState extends State<MainScreenPage> {
                                 ),
                               ],
                             ),
-                            MaterialButton(
-                              onPressed: () => print('dsad'),
-                              padding: EdgeInsets.all(1),
-                              shape: CircleBorder(),
-                              child: Container(
-                                width: 40.0,
-                                height: 40.0,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff0256FF),
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 3,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                      BoxShadow(
-                                        color: Colors.white.withOpacity(0.15),
-                                        spreadRadius: 0.1,
-                                        blurRadius: 3,
-                                        offset: const Offset(-1, -2),
-                                      ),
-                                    ]),
+                            NeumorphicButton(
+                              child: NeumorphicIcon(
+                                Icons.add_circle_outline_rounded,
+                                size: 30,
                               ),
-                            )
+                              style: const NeumorphicStyle(
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.circle(),
+                                  lightSource: LightSource(-1, -2),
+                                  depth: 3,
+                                  intensity: 0.3,
+                                  color: Color(0xff0256FF)),
+                              onPressed: () {
+                                Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SearchPage()));
+                              },
+                            ),
                           ],
                         ),
                       ),
