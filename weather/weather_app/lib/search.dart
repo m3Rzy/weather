@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '_mainscreen.dart';
 
 class SearchPage extends StatelessWidget {
@@ -7,11 +6,11 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 60, 0, 0),
@@ -29,14 +28,16 @@ class SearchPage extends StatelessWidget {
                   Container(
                     width: 300,
                     height: 50,
-                    child: const TextField(
+                    child: TextField(
+                      controller: _controller,
                       autofocus: true,
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(onPressed: _controller.clear, icon: const Icon(Icons.cancel), color: Colors.black),
                         hintText: 'Введите название города',
                       ),
                     ),
                   ),
-                  IconButton(onPressed: () { print('dsa');}, icon: const Icon(Icons.cancel, size: 20,) )
+                  //IconButton(onPressed: () { print('dsa');}, icon: const Icon(Icons.cancel, size: 20,) )
                 ],
               ),
             ),

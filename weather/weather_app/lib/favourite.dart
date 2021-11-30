@@ -17,13 +17,22 @@ class FavouritePage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(15, 60, 0, 0),
                 child: InkWell(
                     child: Row(
-                      children: const [
-                        Icon(
-                          Icons.keyboard_arrow_left,
-                          size: 29.0,
-                          color: Colors.black,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const MainScreenPage()));
+                          },
+                          icon: const Icon(
+                            Icons.keyboard_arrow_left,
+                            size: 29.0,
+                            color: Colors.black,
+                          ),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Избранные',
@@ -47,6 +56,5 @@ class FavouritePage extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
