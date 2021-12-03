@@ -66,48 +66,56 @@ class _MainScreenPageState extends State<MainScreenPage> {
                                 Scaffold.of(context).openDrawer();
                               },
                             ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 39, 0, 0),
-                                  child: FutureBuilder<Weather?>(
-                                      future: getCurrentWeather(),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          return Text(
-                                            snapshot.data!.temp
-                                                .toString()
-                                                .split(".")[0], //TYT
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: "Gilroy-medium",
-                                              fontSize: 80,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          );
-                                        } else {
-                                          return const CircularProgressIndicator();
-                                        }
-                                      }),
-                                ),
-                                Text(
-                                  DateTime.now()
-                                      .toString()
-                                      .split(" ")[0]
-                                      .split("-")
-                                      .join(" "),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Gilroy-medium",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            FutureBuilder<Weather?>(
+                                future: getCurrentWeather(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Column(children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 39, 0, 0),
+                                        child: Text(
+                                          snapshot.data!.temp
+                                              .toString()
+                                              .split(".")[0], //TYT
+
+                                          textAlign: TextAlign.center,
+
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Gilroy-medium",
+                                            fontSize: 80,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        DateTime.now()
+                                            .toString()
+                                            .split(" ")[0]
+                                            .split("-")
+                                            .join(" "),
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Gilroy-medium",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      Text(snapshot.data!.feels_like.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Gilroy-medium",
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                          ))
+                                    ]);
+                                  } else {
+                                    return const CircularProgressIndicator();
+                                  }
+                                }),
                             NeumorphicButton(
                               child: NeumorphicIcon(
                                 Icons.add_circle_outline_rounded,
