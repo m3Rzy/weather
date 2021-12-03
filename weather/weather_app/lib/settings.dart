@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:weather_app/_mainscreen.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -56,8 +57,8 @@ class SettingsPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 16),
                       child: Container(
-                        width: 374,
-                        height: 252,
+                        width: 360,
+                        height: 200,
                         decoration: BoxDecoration(
                           color: const Color(0xffE2EBFF),
                           borderRadius: const BorderRadius.all(
@@ -72,6 +73,50 @@ class SettingsPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('Температура'),
+                                  Center(
+                                      child: Container(
+                                    color: Colors.black.withOpacity(0.15),
+                                    width: 320,
+                                    height: 1,
+                                  )),
+                                  Text('Сила ветра'),
+                                  Center(
+                                      child: Container(
+                                    color: Colors.black.withOpacity(0.15),
+                                    width: 320,
+                                    height: 1,
+                                  )),
+                                  Text('Давление'),
+                                ],
+                              ),
+                            ),
+                            // Column(children: [
+                            //   NeumorphicToggle(
+                            //     children: Container(
+                            //     ),
+                            //     thumb: Neumorphic(
+                            //       style: NeumorphicStyle(
+                            //           shape: NeumorphicShape.concave,
+                            //           boxShape: NeumorphicBoxShape.roundRect(
+                            //               BorderRadius.circular(12)),
+                            //           depth: 8,
+                            //           lightSource: LightSource.topLeft,
+                            //           color: Colors.grey),
+                            //     ),
+                            //   )
+                            // ]),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -84,3 +129,5 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
+
+void setState(Null Function() param0) {}

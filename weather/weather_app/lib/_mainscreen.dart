@@ -5,6 +5,9 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:weather_app/search.dart';
 import 'package:weather_app/settings.dart';
 import 'drawer_header.dart';
+import 'weather.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MainScreenPage extends StatefulWidget {
   const MainScreenPage({Key? key}) : super(key: key);
@@ -14,6 +17,7 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
+  late Future<Weather> weather;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,22 +67,37 @@ class _MainScreenPageState extends State<MainScreenPage> {
                               },
                             ),
                             Column(
-                              children: const [
+                              children: [
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 39, 0, 0),
-                                  child: Text(
-                                    "10°с",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Gilroy-medium",
-                                      fontSize: 80,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 39, 0, 0),
+                                  child: FutureBuilder<Weather?>(
+                                      future: getCurrentWeather(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Text(
+                                            snapshot.data!.temp
+                                                .toString()
+                                                .split(".")[0], //TYT
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Gilroy-medium",
+                                              fontSize: 80,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          );
+                                        } else {
+                                          return const CircularProgressIndicator();
+                                        }
+                                      }),
                                 ),
                                 Text(
-                                  "23 сент. 2021",
+                                  DateTime.now()
+                                      .toString()
+                                      .split(" ")[0]
+                                      .split("-")
+                                      .join(" "),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -103,9 +122,10 @@ class _MainScreenPageState extends State<MainScreenPage> {
                                   color: Color(0xff0256FF)),
                               onPressed: () {
                                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SearchPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SearchPage()));
                               },
                             ),
                           ],
@@ -120,24 +140,25 @@ class _MainScreenPageState extends State<MainScreenPage> {
             persistentHeader: Container(
               height: 50,
               decoration: const BoxDecoration(
-                  color: Color(0xffE2EBFF),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),), //цвет левой менюхи
+                color: Color(0xffE2EBFF),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+              ), //цвет левой менюхи
               child: Center(
                 child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(3),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(3),
+                    ),
+                    color: Color(0xff038CFE),
                   ),
-                  color: Color(0xff038CFE),
-                ),
-                width: 60,
-                height: 3,
+                  width: 60,
+                  height: 3,
                 ),
               ),
             ),
             expandableContent: Container(
               color: const Color(0xffE2EBFF),
-            
+
               height: 600, //360
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Center(
@@ -175,5 +196,21 @@ class _MainScreenPageState extends State<MainScreenPage> {
         );
       }),
     );
+  }
+
+  Future<Weather?> getCurrentWeather() async {
+    Weather? weather;
+    var url =
+        "https://api.openweathermap.org/data/2.5/weather?q=Leningrad&units=metric&appid=bb5a4369565ef4017d0fc442e6336c37";
+
+    final response = await http.get(Uri.parse(url));
+    print("zapors");
+
+    if (response.statusCode == 200) {
+      weather = Weather.fromJSON(jsonDecode(response.body));
+    } else {
+      weather = null;
+    }
+    return weather;
   }
 }
