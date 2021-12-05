@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:weather_app/search.dart';
 import 'package:weather_app/settings.dart';
+import 'package:weather_app/weatherWidgets.dart';
 import 'drawer_header.dart';
 import 'weather.dart';
 import 'package:http/http.dart' as http;
@@ -171,33 +172,70 @@ class _MainScreenPageState extends State<MainScreenPage> {
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Center(
                 //header
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 221, 0, 0), //171px
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: const Color(0xffE2EBFF),
-                          shadowColor: Colors.black,
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          primary: const Color(0xff038CFE),
-                          side: const BorderSide(color: Color(0xff038CFE)),
-                        ),
-                        child: const Text(
-                          'Прогноз на неделю',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: "Gilroy-medium",
-                            fontSize: 14,
-                          ),
-                        ),
-                        onPressed: () => print('object'),
-                      ),
-                    )
-                  ],
-                ),
+                child: FutureBuilder<Weather?>(
+                    future: getCurrentWeather(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Column(
+                          children: [
+                            Container(
+                                width: 65,
+                                height: 122,
+                                color: const Color(0xffE0E9FD),
+                                child: Row(
+                                  children: [
+                                    Align(
+                                      //блоки с погодой на день 06, 12, 18
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        snapshot.data!.temp.toString(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Gilroy-medium",
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  0, 221, 0, 0), //171px
+                              child: OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: const Color(0xffE2EBFF),
+                                  shadowColor: Colors.black,
+                                  elevation: 6,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  primary: const Color(0xff038CFE),
+                                  side: const BorderSide(
+                                      color: Color(0xff038CFE)),
+                                ),
+                                child: const Text(
+                                  'Прогноз на неделю',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: "Gilroy-medium",
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const WeatherListWidget()));
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }),
               ),
             ),
           ),
@@ -212,6 +250,9 @@ class _MainScreenPageState extends State<MainScreenPage> {
         "https://api.openweathermap.org/data/2.5/weather?q=Leningrad&units=metric&appid=bb5a4369565ef4017d0fc442e6336c37";
 
     final response = await http.get(Uri.parse(url));
+    
+    print(jsonDecode(response.body));
+
     print("zapors");
 
     if (response.statusCode == 200) {
