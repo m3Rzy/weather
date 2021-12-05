@@ -11,3 +11,17 @@ class Weather {
     );
   }
 }
+
+class WeatherForHours {
+  final String description;
+  final double temp_day;
+
+  WeatherForHours({required this.temp_day, required this.description});
+
+  factory WeatherForHours.fromJSON(Map<String, dynamic> json) {
+    return WeatherForHours(
+      temp_day: double.parse(json["temp"].toString()),
+      description: json["weather"]["description"].toString(),
+    );
+  }
+}
