@@ -83,38 +83,46 @@ class SettingsPage extends StatelessWidget {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text('Температура'),
-                                  Center(
-                                      child: Container(
-                                    color: Colors.black.withOpacity(0.15),
-                                    width: 320,
-                                    height: 1,
-                                  )),
+                                  // Center( // полоска снизу текста прозрачная
+                                  //     child: Container(
+                                  //   color: Colors.black.withOpacity(0.15),
+                                  //   width: 320,
+                                  //   height: 1,
+                                  // )),
                                   Text('Сила ветра'),
-                                  Center(
-                                      child: Container(
-                                    color: Colors.black.withOpacity(0.15),
-                                    width: 320,
-                                    height: 1,
-                                  )),
+                                  // Center(
+                                  //     child: Container(
+                                  //   color: Colors.black.withOpacity(0.15),
+                                  //   width: 320,
+                                  //   height: 1,
+                                  // )),
                                   Text('Давление'),
                                 ],
                               ),
                             ),
-                            // Column(children: [
-                            //   NeumorphicToggle(
-                            //     children: Container(
-                            //     ),
-                            //     thumb: Neumorphic(
-                            //       style: NeumorphicStyle(
-                            //           shape: NeumorphicShape.concave,
-                            //           boxShape: NeumorphicBoxShape.roundRect(
-                            //               BorderRadius.circular(12)),
-                            //           depth: 8,
-                            //           lightSource: LightSource.topLeft,
-                            //           color: Colors.grey),
-                            //     ),
-                            //   )
-                            // ]),
+                            Container(
+                              width: 100,
+                              height: 100,
+                              child: Column(children: [
+                                // ошибка
+                                NeumorphicToggle(
+                                  height: 50,
+                                  thumb: Neumorphic(),
+                                  children: [
+                                    ToggleElement(
+                                      background: Container(
+                                          color: Colors.blue,
+                                          width: 50,
+                                          height: 50),
+                                      foreground: Container(
+                                          color: Colors.red,
+                                          width: 50,
+                                          height: 50),
+                                    ),
+                                  ],
+                                )
+                              ]),
+                            ),
                           ],
                         ),
                       ),

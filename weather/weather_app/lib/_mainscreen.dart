@@ -77,8 +77,9 @@ class _MainScreenPageState extends State<MainScreenPage> {
                                             0, 39, 0, 0),
                                         child: Text(
                                           snapshot.data!.temp
-                                              .toString()
-                                              .split(".")[0], //TYT
+                                                  .toString()
+                                                  .split(".")[0] +
+                                              '˚c', //TYT
 
                                           textAlign: TextAlign.center,
 
@@ -179,26 +180,61 @@ class _MainScreenPageState extends State<MainScreenPage> {
                         return Column(
                           children: [
                             Container(
-                                width: 65,
-                                height: 122,
-                                color: const Color(0xffE0E9FD),
-                                child: Row(
-                                  children: [
-                                    Align(
-                                      //блоки с погодой на день 06, 12, 18
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        snapshot.data!.temp.toString(),
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: "Gilroy-medium",
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w400,
-                                        ),
+                              // сделать эекстра виджет
+                              //блок контейнера
+                              width: 65,
+                              height: 122,
+                              padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      '06:00',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Gilroy-medium",
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                  ],
-                                )),
+                                  ),
+                                  Image.asset('assets/icons/lightning.png',
+                                      width: 40, height: 40),
+                                  Text(
+                                    snapshot.data!.temp.toString() + '˚c',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: "Gilroy-medium",
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE0E9FD),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 7),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.025),
+                                    spreadRadius: 1,
+                                    blurRadius: 9,
+                                    offset: const Offset(0, -5),
+                                  )
+                                ],
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(
                                   0, 221, 0, 0), //171px
@@ -250,7 +286,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
         "https://api.openweathermap.org/data/2.5/weather?q=Leningrad&units=metric&appid=bb5a4369565ef4017d0fc442e6336c37";
 
     final response = await http.get(Uri.parse(url));
-    
+
     print(jsonDecode(response.body));
 
     print("zapors");
