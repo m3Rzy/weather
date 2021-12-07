@@ -81,7 +81,7 @@ class SettingsPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
-                                children: [
+                                children: const [
                                   Text('Температура'),
                                   // Center( // полоска снизу текста прозрачная
                                   //     child: Container(
@@ -119,6 +119,7 @@ class SettingsPage extends StatelessWidget {
                                           width: 50,
                                           height: 50),
                                     ),
+                                    
                                   ],
                                 )
                               ]),
@@ -138,4 +139,3 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-void setState(Null Function() param0) {}

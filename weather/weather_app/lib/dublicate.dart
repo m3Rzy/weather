@@ -20,31 +20,23 @@ class DublicatePage extends StatefulWidget {
 
 class _DublicatePageState extends State<DublicatePage> {
   late Future<Weather> weather;
-    bool flag = false;
+  bool flag = false;
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SafeArea(
           child: ExpandableBottomSheet(
         //enableToggle: false,
         onIsContractedCallback: () {
-         print(flag); 
-            flag = false;
+          flag = false;
 
-         setState(() {
-            
-          });
+          setState(() {});
         },
 
         onIsExtendedCallback: () {
-         print(flag); 
+          flag = true;
 
-            flag = true;
-         print(flag); 
-
-          setState(() {
-          });
+          setState(() {});
         },
 
         persistentContentHeight: 300,
