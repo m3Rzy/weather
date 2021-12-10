@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:weather_app/search.dart';
 import 'package:weather_app/settings.dart';
+import 'package:weather_app/splash.dart';
 import 'package:weather_app/weatherWidgets.dart';
 import 'package:weather_app/widgets/weatherpresentation.dart';
+import 'data/service/api.dart';
 import 'drawer_header.dart';
-import 'dublicate.dart';
+import 'elements_main.dart';
 import 'weather.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -25,7 +27,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
   //Weather weatherTest = Weather(feels_like: 2.7, temp: 2.2);
   @override
   Widget build(BuildContext context) {
-    print(flag);
+    
     return Scaffold(
       drawer: Drawer(
         child: Container(
@@ -37,7 +39,17 @@ class _MainScreenPageState extends State<MainScreenPage> {
           ),
         ),
       ),
-      body: DublicatePage(),
+      body: FutureBuilder<Weather?>(
+                          future: getCurrentWeather(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+      
+      return const DublicatePage();
+                            } else {
+                              return SplashScreen();
+                            }
+                            }
+      ),
     );
   }
 

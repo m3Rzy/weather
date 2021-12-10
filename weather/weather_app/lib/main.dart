@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:weather_app/splash.dart';
 
+import '_mainscreen.dart';
+
 void main() {
   runApp(Main());
 }
@@ -15,7 +17,7 @@ class Main extends StatelessWidget {
         canvasColor: const Color(0xffE2EBFF), //цвет левой менюхи
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const MainScreenPage(),
     );
   }
   
