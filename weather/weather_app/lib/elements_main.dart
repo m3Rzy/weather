@@ -12,15 +12,19 @@ import 'weather.dart';
 import 'dart:convert';
 
 class DublicatePage extends StatefulWidget {
-  const DublicatePage({Key? key}) : super(key: key);
+  final Weather? weather;
+  const DublicatePage({Key? key, required this.weather}) : super(key: key);
 
   @override
-  _DublicatePageState createState() => _DublicatePageState();
+  _DublicatePageState createState() => _DublicatePageState(weather: weather);
 }
 
 class _DublicatePageState extends State<DublicatePage> {
-  late Future<Weather> weather;
   bool flag = false;
+  Weather? weather;
+
+  _DublicatePageState({Key? key, required this.weather});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,49 +75,38 @@ class _DublicatePageState extends State<DublicatePage> {
                             Scaffold.of(context).openDrawer();
                           },
                         ),
-                        FutureBuilder<Weather?>(
-                            future: getCurrentWeather(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return Column(children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 39, 0, 0),
-                                    child: Text(
-                                      snapshot.data!.temp
-                                              .toString()
-                                              .split(".")[0] +
-                                          '˚c', //TYT
+                        Column(children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 39, 0, 0),
+                            child: Text(
+                              weather!.temp.toString().split(".")[0] +
+                                  '˚c', //TYT
 
-                                      textAlign: TextAlign.center,
+                              textAlign: TextAlign.center,
 
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Gilroy-medium",
-                                        fontSize: 80,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    DateTime.now()
-                                        .toString()
-                                        .split(" ")[0]
-                                        .split("-")
-                                        .join(" "),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: "Gilroy-medium",
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ]);
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            }),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Gilroy-medium",
+                                fontSize: 80,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            DateTime.now()
+                                .toString()
+                                .split(" ")[0]
+                                .split("-")
+                                .join(" "),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Gilroy-medium",
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ]),
                         NeumorphicButton(
                           child: NeumorphicIcon(
                             Icons.add_circle_outline_rounded,
@@ -194,253 +187,215 @@ class _DublicatePageState extends State<DublicatePage> {
                   visible: flag,
                   child: Column(
                     children: [
-                      FutureBuilder<Weather?>(
-                          future: getCurrentWeather(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 32),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                      //мин. темпа
-                                      width: 150,
-                                      height: 65,
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                                      child: Column(
-                                        // сделать отступы 
-                                        children: [
-                                          const Icon(
-                                              Icons.thermostat_auto_outlined,
-                                              color: Color(0xff5A5A5A),
-                                              size: 24),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              snapshot.data!.feels_like
-                                                      .toString()
-                                                      .split('.')[0] +
-                                                  ' ˚c',
-                                              style: const TextStyle(
-                                                color: Color(0xff5A5A5A),
-                                                fontFamily: "Gilroy-medium",
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffE0E9FD),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            spreadRadius: 1,
-                                            blurRadius: 20,
-                                            offset: const Offset(0, 7),
-                                          ),
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.025),
-                                            spreadRadius: 1,
-                                            blurRadius: 9,
-                                            offset: const Offset(0, -5),
-                                          )
-                                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              //мин. темпа
+                              width: 150,
+                              height: 65,
+                              padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
+                              child: Column(
+                                // сделать отступы
+                                children: [
+                                  const Icon(Icons.thermostat_auto_outlined,
+                                      color: Color(0xff5A5A5A), size: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      weather!.feels_like
+                                              .toString()
+                                              .split('.')[0] +
+                                          ' ˚c',
+                                      style: const TextStyle(
+                                        color: Color(0xff5A5A5A),
+                                        fontFamily: "Gilroy-medium",
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Container(
-                                      //влажность
-                                      width: 150,
-                                      height: 65,
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                                      child: Column(
-                                        // сделать отступы 
-                                        children: [
-                                          const Icon(Icons.pin_drop_outlined,
-                                              color: Color(0xff5A5A5A),
-                                              size: 24),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              snapshot.data!.humidity
-                                                      .toString().split('.')[0] +
-                                                  '%',
-                                              style: const TextStyle(
-                                                color: Color(0xff5A5A5A),
-                                                fontFamily: "Gilroy-medium",
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffE0E9FD),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            spreadRadius: 1,
-                                            blurRadius: 20,
-                                            offset: const Offset(0, 7),
-                                          ),
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.025),
-                                            spreadRadius: 1,
-                                            blurRadius: 9,
-                                            offset: const Offset(0, -5),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE0E9FD),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
                                 ),
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          }),
-                      FutureBuilder<Weather?>(
-                          future: getCurrentWeather(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 32),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Container(
-                                      //скорость ветра
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 7),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.025),
+                                    spreadRadius: 1,
+                                    blurRadius: 9,
+                                    offset: const Offset(0, -5),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              //влажность
+                              width: 150,
+                              height: 65,
+                              padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
+                              child: Column(
+                                // сделать отступы
+                                children: [
+                                  const Icon(Icons.pin_drop_outlined,
+                                      color: Color(0xff5A5A5A), size: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      weather!.humidity
+                                              .toString()
+                                              .split('.')[0] +
+                                          '%',
+                                      style: const TextStyle(
+                                        color: Color(0xff5A5A5A),
+                                        fontFamily: "Gilroy-medium",
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE0E9FD),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 7),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.025),
+                                    spreadRadius: 1,
+                                    blurRadius: 9,
+                                    offset: const Offset(0, -5),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              //скорость ветра
 
-                                      width: 150,
-                                      height: 65,
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(Icons.air_outlined,
-                                              color: Color(0xff5A5A5A),
-                                              size: 24.0),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              snapshot.data!.speed
-                                                      .toString()
-                                                      .split(".")[0] +
-                                                  ' м/с',
-                                              style: const TextStyle(
-                                                color: Color(0xff5A5A5A),
-                                                fontFamily: "Gilroy-medium",
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffE0E9FD),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            spreadRadius: 1,
-                                            blurRadius: 20,
-                                            offset: const Offset(0, 7),
-                                          ),
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.025),
-                                            spreadRadius: 1,
-                                            blurRadius: 9,
-                                            offset: const Offset(0, -5),
-                                          )
-                                        ],
+                              width: 150,
+                              height: 65,
+                              padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.air_outlined,
+                                      color: Color(0xff5A5A5A), size: 24.0),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      weather!.speed
+                                              .toString()
+                                              .split(".")[0] +
+                                          ' м/с',
+                                      style: const TextStyle(
+                                        color: Color(0xff5A5A5A),
+                                        fontFamily: "Gilroy-medium",
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    Container(
-                                      //влажность
-                                      width: 150,
-                                      height: 65,
-                                      padding:
-                                          const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(Icons.speed_outlined,
-                                              color: Color(0xff5A5A5A),
-                                              size: 24),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              snapshot.data!.pressure
-                                                      .toString()
-                                                      .split('.')[0] +
-                                                  ' мм.рт.с',
-                                              style: const TextStyle(
-                                                color: Color(0xff5A5A5A),
-                                                fontFamily: "Gilroy-medium",
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffE0E9FD),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            spreadRadius: 1,
-                                            blurRadius: 20,
-                                            offset: const Offset(0, 7),
-                                          ),
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.025),
-                                            spreadRadius: 1,
-                                            blurRadius: 9,
-                                            offset: const Offset(0, -5),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE0E9FD),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
                                 ),
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          }),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 7),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.025),
+                                    spreadRadius: 1,
+                                    blurRadius: 9,
+                                    offset: const Offset(0, -5),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              //влажность
+                              width: 150,
+                              height: 65,
+                              padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.speed_outlined,
+                                      color: Color(0xff5A5A5A), size: 24),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      weather!.pressure
+                                              .toString()
+                                              .split('.')[0] +
+                                          ' мм.рт.с',
+                                      style: const TextStyle(
+                                        color: Color(0xff5A5A5A),
+                                        fontFamily: "Gilroy-medium",
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE0E9FD),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 7),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.025),
+                                    spreadRadius: 1,
+                                    blurRadius: 9,
+                                    offset: const Offset(0, -5),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   replacement: Padding(
@@ -480,6 +435,4 @@ class _DublicatePageState extends State<DublicatePage> {
       )),
     );
   }
-
-  
 }

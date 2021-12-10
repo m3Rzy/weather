@@ -33,7 +33,7 @@ class WeatherPresentation extends StatelessWidget {
           ),
           Image.asset('assets/icons/lightning.png', width: 40, height: 40),
           Text(
-            weather!.temp_day.toString() + '˚c',
+            weather!.temp.toString() + '˚c',
             style: const TextStyle(
               color: Colors.black,
               fontFamily: "Gilroy-medium",

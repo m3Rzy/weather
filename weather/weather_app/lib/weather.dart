@@ -5,6 +5,7 @@ class Weather {
   final double pressure;
   final double humidity;
 
+
   Weather({required this.temp, required this.feels_like, required this.speed, required this.pressure, required this.humidity});
 
   factory Weather.fromJSON(Map<String, dynamic> json) {
@@ -14,19 +15,21 @@ class Weather {
       speed: double.parse(json["wind"]["speed"].toString()),
       pressure: double.parse(json["main"]["pressure"].toString()),
       humidity: double.parse(json["main"]["humidity"].toString()),
+
+      
     );
   }
 }
 
 class WeatherForHours {
   final String description;
-  final double temp_day;
+  final double temp;
 
-  WeatherForHours({required this.temp_day, required this.description});
+  WeatherForHours({required this.temp, required this.description});
 
   factory WeatherForHours.fromJSON(Map<String, dynamic> json) {
     return WeatherForHours(
-      temp_day: double.parse(json["temp"].toString()),
+      temp: double.parse(json["temp"].toString()),
       description: json["weather"]["description"].toString(),
     );
   }

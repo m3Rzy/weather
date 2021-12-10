@@ -44,7 +44,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
       
-      return const DublicatePage();
+      return DublicatePage(weather: snapshot.data);
                             } else {
                               return SplashScreen();
                             }
