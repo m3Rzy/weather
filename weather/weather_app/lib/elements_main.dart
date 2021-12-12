@@ -171,13 +171,13 @@ class _DublicatePageState extends State<DublicatePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               WeatherPresentation(
-                                  weather: snapshot.data![0], time: "06:00"),
+                                  weathers: snapshot.data![1], time: "06:00"), // 0
                               WeatherPresentation(
-                                  weather: snapshot.data![1], time: "12:00"),
+                                  weathers: snapshot.data![1], time: "12:00"), // 1
                               WeatherPresentation(
-                                  weather: snapshot.data![2], time: "18:00"),
+                                  weathers: snapshot.data![1], time: "18:00"), // 2
                               WeatherPresentation(
-                                  weather: snapshot.data![3], time: "00:00"),
+                                  weathers: snapshot.data![1], time: "00:00"), // 3
                             ]);
                       } else {
                         return const CircularProgressIndicator();
@@ -310,9 +310,7 @@ class _DublicatePageState extends State<DublicatePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      weather!.speed
-                                              .toString()
-                                              .split(".")[0] +
+                                      weather!.speed.toString().split(".")[0] +
                                           ' м/с',
                                       style: const TextStyle(
                                         color: Color(0xff5A5A5A),

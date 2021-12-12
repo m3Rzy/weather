@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/weather.dart';
 
 class WeatherPresentation extends StatelessWidget {
-  final WeatherForHours? weather;
+  final WeatherForHours? weathers;
   final String time;
   const WeatherPresentation({
     Key? key,
-    required this.weather,
+    required this.weathers,
     required this.time,
   }) : super(key: key);
 
@@ -33,7 +33,7 @@ class WeatherPresentation extends StatelessWidget {
           ),
           Image.asset('assets/icons/lightning.png', width: 40, height: 40),
           Text(
-            weather!.temp.toString() + '˚c',
+            weathers!.temp.toString() + '˚c',
             style: const TextStyle(
               color: Colors.black,
               fontFamily: "Gilroy-medium",
