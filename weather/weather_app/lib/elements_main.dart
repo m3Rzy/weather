@@ -164,20 +164,20 @@ class _DublicatePageState extends State<DublicatePage> {
             child: Column(
               children: [
                 FutureBuilder<List<WeatherForHours?>?>(
-                    future: getWeatherHourly(),
+                    future: getFilesList(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               WeatherPresentation(
-                                  weathers: snapshot.data![1], time: "06:00"), // 0
+                                  weathers: snapshot.data![0], time: "06:00"), // 0
                               WeatherPresentation(
                                   weathers: snapshot.data![1], time: "12:00"), // 1
                               WeatherPresentation(
-                                  weathers: snapshot.data![1], time: "18:00"), // 2
+                                  weathers: snapshot.data![2], time: "18:00"), // 2
                               WeatherPresentation(
-                                  weathers: snapshot.data![1], time: "00:00"), // 3
+                                  weathers: snapshot.data![3], time: "00:00"), // 3
                             ]);
                       } else {
                         return const CircularProgressIndicator();
