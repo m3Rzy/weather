@@ -26,15 +26,16 @@ class Weather {
 
 class WeatherForHours {
   final double temp;
+  final String desc;
   
 
-  WeatherForHours({required this.temp});
+  WeatherForHours({required this.temp, required this.desc});
 
   factory WeatherForHours.fromJSON(Map<String, dynamic> json) {
     
     return WeatherForHours(
-      temp: double.parse(json["temp"].toString().split(".")[0]),
-      
+      temp: double.parse(json["temp"].toString()),
+      desc: (json["weather"][0]["main"].toString()),
     );
   }
 }

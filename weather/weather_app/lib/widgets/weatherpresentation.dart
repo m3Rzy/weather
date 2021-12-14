@@ -31,9 +31,10 @@ class WeatherPresentation extends StatelessWidget {
               ),
             ),
           ),
-          Image.asset('assets/icons/lightning.png', width: 40, height: 40),
+          // сделать IF
+          Lightning(),
           Text(
-            weathers!.temp.toString() + '˚c',
+            weathers!.temp.toString() + '˚c', //weathers!.temp.toString()
             style: const TextStyle(
               color: Colors.black,
               fontFamily: "Gilroy-medium",
@@ -66,3 +67,15 @@ class WeatherPresentation extends StatelessWidget {
     );
   }
 }
+
+class Lightning extends StatelessWidget {
+  const Lightning({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset('assets/icons/lightning.png', width: 40, height: 40);
+  }
+}
+

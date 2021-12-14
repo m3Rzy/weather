@@ -36,7 +36,7 @@ Future<List<WeatherForHours?>> getFilesList() async {
   fileslist = [];
 
   final response2 = await http.get(Uri.parse(url2));
-
+  print(response2.body);
   if (response2.statusCode == 200) {
     var files = jsonDecode(response2.body);
     for (int i = 5; i < 24; i += 6) {
@@ -45,5 +45,6 @@ Future<List<WeatherForHours?>> getFilesList() async {
   } else {
     fileslist = [];
   }
+
   return fileslist;
 }

@@ -46,7 +46,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
       
       return DublicatePage(weather: snapshot.data);
                             } else {
-                              return SplashScreen();
+                              return const SplashScreen();
                             }
                             }
       ),
@@ -55,4 +55,8 @@ class _MainScreenPageState extends State<MainScreenPage> {
 
   //https://api.weatherbit.io/v2.0/forecast/daily?postal_code=195252&key=7d214942457c4a7daae17a15d9b46f75
   //pro.openweathermap.org/data/2.5/forecast/hourly?q={city name}&appid={API key}
+}
+
+class DownloadingApi {
+
 }

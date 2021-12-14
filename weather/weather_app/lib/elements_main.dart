@@ -55,76 +55,126 @@ class _DublicatePageState extends State<DublicatePage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.only(top: 44.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        NeumorphicButton(
-                          child: NeumorphicIcon(
-                            Icons.menu_rounded,
-                            size: 30,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: NeumorphicButton(
+                            child: NeumorphicIcon(
+                              Icons.menu_rounded,
+                              size: 30,
+                            ),
+                            style: const NeumorphicStyle(
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.circle(),
+                                lightSource: LightSource(-1, -2),
+                                depth: 3,
+                                intensity: 0.3,
+                                color: Color(0xff0256FF)),
+                            onPressed: () {
+                              Scaffold.of(context).openDrawer();
+                            },
                           ),
-                          style: const NeumorphicStyle(
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.circle(),
-                              lightSource: LightSource(-1, -2),
-                              depth: 3,
-                              intensity: 0.3,
-                              color: Color(0xff0256FF)),
-                          onPressed: () {
-                            Scaffold.of(context).openDrawer();
-                          },
                         ),
                         Column(children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 39, 0, 0),
-                            child: Text(
-                              weather!.temp.toString().split(".")[0] +
-                                  '˚c', //TYT
+                          Visibility(
+                            visible: flag,
+                            child: Column(
+                              children: [
+                                const Padding(
+                                  padding: const EdgeInsets.only(top: 14),
+                                  child: Text(
+                                    'Санкт-Петербург',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Gilroy-medium",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                                  child: Text(
+                                    weather!.temp.toString().split(".")[0] +
+                                        '˚c', //TYT
 
-                              textAlign: TextAlign.center,
+                                    textAlign: TextAlign.center,
 
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Gilroy-medium",
-                                fontSize: 80,
-                                fontWeight: FontWeight.w600,
-                              ),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Gilroy-medium",
+                                      fontSize: 80,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          Text(
-                            DateTime.now()
-                                .toString()
-                                .split(" ")[0]
-                                .split("-")
-                                .join(" "),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Gilroy-medium",
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                            replacement: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                                  child: Text(
+                                    weather!.temp.toString().split(".")[0] +
+                                        '˚c', //TYT
+
+                                    textAlign: TextAlign.center,
+
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Gilroy-medium",
+                                      fontSize: 80,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  DateTime.now()
+                                      .toString()
+                                      .split(" ")[0]
+                                      .split("-")
+                                      .join(" "),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Gilroy-medium",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ]),
-                        NeumorphicButton(
-                          child: NeumorphicIcon(
-                            Icons.add_circle_outline_rounded,
-                            size: 30,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: NeumorphicButton(
+                            child: NeumorphicIcon(
+                              Icons.add_circle_outline_rounded,
+                              size: 30,
+                            ),
+                            style: const NeumorphicStyle(
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.circle(),
+                                lightSource: LightSource(-1, -2),
+                                depth: 3,
+                                intensity: 0.3,
+                                color: Color(0xff0256FF)),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchPage()));
+                            },
                           ),
-                          style: const NeumorphicStyle(
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.circle(),
-                              lightSource: LightSource(-1, -2),
-                              depth: 3,
-                              intensity: 0.3,
-                              color: Color(0xff0256FF)),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SearchPage()));
-                          },
                         ),
                       ],
                     ),
@@ -171,13 +221,17 @@ class _DublicatePageState extends State<DublicatePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               WeatherPresentation(
-                                  weathers: snapshot.data![0], time: "06:00"), // 0
+                                  weathers: snapshot.data![0],
+                                  time: "06:00"), // 0
                               WeatherPresentation(
-                                  weathers: snapshot.data![1], time: "12:00"), // 1
+                                  weathers: snapshot.data![1],
+                                  time: "12:00"), // 1
                               WeatherPresentation(
-                                  weathers: snapshot.data![2], time: "18:00"), // 2
+                                  weathers: snapshot.data![2],
+                                  time: "18:00"), // 2
                               WeatherPresentation(
-                                  weathers: snapshot.data![3], time: "00:00"), // 3
+                                  weathers: snapshot.data![3],
+                                  time: "00:00"), // 3
                             ]);
                       } else {
                         return const CircularProgressIndicator();
@@ -188,7 +242,7 @@ class _DublicatePageState extends State<DublicatePage> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 32),
+                        padding: const EdgeInsets.only(top: 52),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -197,10 +251,10 @@ class _DublicatePageState extends State<DublicatePage> {
                               width: 150,
                               height: 65,
                               padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                              child: Column(
-                                // сделать отступы
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.thermostat_auto_outlined,
+                                  const Icon(Icons.thermostat_outlined,
                                       color: Color(0xff5A5A5A), size: 24),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
@@ -245,10 +299,10 @@ class _DublicatePageState extends State<DublicatePage> {
                               width: 150,
                               height: 65,
                               padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                              child: Column(
-                                // сделать отступы
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.pin_drop_outlined,
+                                  const Icon(Icons.water_outlined,
                                       color: Color(0xff5A5A5A), size: 24),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
@@ -344,11 +398,11 @@ class _DublicatePageState extends State<DublicatePage> {
                               ),
                             ),
                             Container(
-                              //влажность
+                              //давление
                               width: 150,
                               height: 65,
                               padding: const EdgeInsets.fromLTRB(0, 7, 0, 5),
-                              child: Column(
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Icon(Icons.speed_outlined,

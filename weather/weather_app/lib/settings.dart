@@ -109,6 +109,7 @@ class SettingsPage extends StatelessWidget {
                                   height: 50,
                                   thumb: Neumorphic(),
                                   children: [
+                                    //ToggleElementButton(),
                                     ToggleElement(
                                       background: Container(
                                           color: Colors.blue,
@@ -119,7 +120,16 @@ class SettingsPage extends StatelessWidget {
                                           width: 50,
                                           height: 50),
                                     ),
-                                    
+                                    ToggleElement(
+                                      background: Container(
+                                          color: Colors.blue,
+                                          width: 50,
+                                          height: 50),
+                                      foreground: Container(
+                                          color: Colors.red,
+                                          width: 50,
+                                          height: 50),
+                                    ),
                                   ],
                                 )
                               ]),
@@ -138,4 +148,3 @@ class SettingsPage extends StatelessWidget {
     );
   }
 }
-
