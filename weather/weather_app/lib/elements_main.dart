@@ -227,20 +227,20 @@ class _DublicatePageState extends State<DublicatePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               WeatherPresentation(
-                                  weathers: snapshot.data![0],
-                                  src: 'assets/icons/lightning.png',
+                                  weather: snapshot.data![0],
+                                  //src: 'assets/icons/lightning.png',
                                   time: "06:00"), // 0
                               WeatherPresentation(
-                                  weathers: snapshot.data![1],
-                                  src: 'assets/icons/sun.png',
+                                  weather: snapshot.data![1],
+                                  //src: 'assets/icons/sun.png',
                                   time: "12:00"), // 1
                               WeatherPresentation(
-                                  weathers: snapshot.data![2],
-                                  src: 'assets/icons/rain.png',
+                                  weather: snapshot.data![2],
+                                  //src: 'assets/icons/rain.png',
                                   time: "18:00"), // 2
                               WeatherPresentation(
-                                  weathers: snapshot.data![3],
-                                  src: 'assets/icons/rain-3drops.png',
+                                  weather: snapshot.data![3],
+                                  //src: 'assets/icons/rain-3drops.png',
                                   time: "00:00"), // 3
                             ]);
                       } else {

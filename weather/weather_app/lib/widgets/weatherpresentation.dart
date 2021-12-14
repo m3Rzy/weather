@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/weather.dart';
 
 class WeatherPresentation extends StatelessWidget {
-  final WeatherForHours? weathers;
+  final WeatherForHours? weather;
   final String time;
-  final String src;
   const WeatherPresentation({
     Key? key,
-    required this.weathers,
+    required this.weather,
     required this.time,
-    required this.src,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(weather!.desc);
     return Container(
       width: 65,
       height: 122,
@@ -34,9 +33,14 @@ class WeatherPresentation extends StatelessWidget {
             ),
           ),
           // сделать IF
-          Image.asset(src, width: 40, height: 40),
+
+          Image.asset(
+              "icons/${weather!.desc.toLowerCase().split(" ").join("_")}.png", //https://www.figma.com/file/hHDeI5LFtcXkT9W6M39k34/Component-Based-Weather-Icon-Sets-(Community)?node-id=1%3A8
+              width: 40,
+              height:
+                  40), ////////////////////////////////////////////////////////
           Text(
-            weathers!.temp.toString() + '˚c', //weathers!.temp.toString()
+            weather!.temp.toString() + '˚c', //weathers!.temp.toString()
             style: const TextStyle(
               color: Colors.black,
               fontFamily: "Gilroy-medium",
@@ -67,13 +71,5 @@ class WeatherPresentation extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  getItem() {
-    String src_new;
-    switch(weathers!.desc){
-        case sun:
-          src_new == 
-    }
   }
 }
