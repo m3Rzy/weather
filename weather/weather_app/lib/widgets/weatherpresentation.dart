@@ -4,10 +4,12 @@ import 'package:weather_app/weather.dart';
 class WeatherPresentation extends StatelessWidget {
   final WeatherForHours? weathers;
   final String time;
+  final String src;
   const WeatherPresentation({
     Key? key,
     required this.weathers,
     required this.time,
+    required this.src,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class WeatherPresentation extends StatelessWidget {
             ),
           ),
           // сделать IF
-          Lightning(),
+          Image.asset(src, width: 40, height: 40),
           Text(
             weathers!.temp.toString() + '˚c', //weathers!.temp.toString()
             style: const TextStyle(
@@ -66,16 +68,12 @@ class WeatherPresentation extends StatelessWidget {
       ),
     );
   }
-}
 
-class Lightning extends StatelessWidget {
-  const Lightning({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset('assets/icons/lightning.png', width: 40, height: 40);
+  getItem() {
+    String src_new;
+    switch(weathers!.desc){
+        case sun:
+          src_new == 
+    }
   }
 }
-

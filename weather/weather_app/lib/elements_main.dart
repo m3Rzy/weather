@@ -213,6 +213,12 @@ class _DublicatePageState extends State<DublicatePage> {
             //header
             child: Column(
               children: [
+                Visibility(
+                  visible: flag,
+                  child: const Padding(
+                      padding: EdgeInsets.only(top: 30)), //добавить дату
+                  replacement: Container(),
+                ),
                 FutureBuilder<List<WeatherForHours?>?>(
                     future: getFilesList(),
                     builder: (context, snapshot) {
@@ -222,15 +228,19 @@ class _DublicatePageState extends State<DublicatePage> {
                             children: [
                               WeatherPresentation(
                                   weathers: snapshot.data![0],
+                                  src: 'assets/icons/lightning.png',
                                   time: "06:00"), // 0
                               WeatherPresentation(
                                   weathers: snapshot.data![1],
+                                  src: 'assets/icons/sun.png',
                                   time: "12:00"), // 1
                               WeatherPresentation(
                                   weathers: snapshot.data![2],
+                                  src: 'assets/icons/rain.png',
                                   time: "18:00"), // 2
                               WeatherPresentation(
                                   weathers: snapshot.data![3],
+                                  src: 'assets/icons/rain-3drops.png',
                                   time: "00:00"), // 3
                             ]);
                       } else {
